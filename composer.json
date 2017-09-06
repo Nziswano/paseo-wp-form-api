@@ -1,0 +1,13 @@
+{
+    "name": "paseo/contact-form-api",
+    "description": "API plugin for form submission",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Johan Martin",
+            "email": "johan@paseo.org.za"
+        }
+    ],
+    "require": {}
+}

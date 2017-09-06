@@ -1,5 +1,5 @@
 {
-    "name": "paseo/contact-form-api",
+    "name": "paseo/paseo-wp-form-api",
     "description": "API plugin for form submission",
     "type": "wordpress-plugin",
     "license": "MIT",

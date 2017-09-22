@@ -9,5 +9,9 @@
             "email": "johan@paseo.org.za"
         }
     ],
-    "require": {}
+    "require": {},
+    "require-dev": {
+      "phpmd/phpmd" : "@stable",
+      "phpunit/phpunit": "~6"
+    }
 }

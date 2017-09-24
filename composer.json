@@ -11,7 +11,10 @@
     ],
     "require": {},
     "require-dev": {
-      "phpmd/phpmd" : "@stable",
-      "phpunit/phpunit": "~6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Paseo\\": "src/"
+        }
     }
 }

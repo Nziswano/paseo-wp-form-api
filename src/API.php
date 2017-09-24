@@ -79,6 +79,7 @@ class Api {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_class_hooks();
 
 	}
 
@@ -157,8 +158,8 @@ class Api {
 
 	private function define_class_hooks() {
 		/* Meta Box */
-		$this->loader->add_class_action('add_meta_boxes', array('Metaboxes\Metaboxes', 'custom_box') );
-		$this->loader->add_class_action('save_post', array('Metaboxes\Metaboxes', 'save_meta') );
+		$this->loader->add_class_action('add_meta_boxes', array('Paseo\Metaboxes\Metaboxes', 'custom_box') );
+		$this->loader->add_class_action('save_post', array('Paseo\Metaboxes\Metaboxes', 'save_meta') );
 	}
 
 	/**

@@ -16,7 +16,7 @@ class Metaboxes {
 			add_meta_box(
 				'paseo_box_id',
 				'Custom Meta Box',
-				array('Metaboxes','wporg_custom_box_html'),
+				array('Paseo\Metaboxes\Metaboxes','custom_box_html'),
 				$screen
 			);
 		}

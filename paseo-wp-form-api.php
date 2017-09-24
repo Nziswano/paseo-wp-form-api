@@ -45,6 +45,11 @@ if (version_compare($wp_version, "4.7", "<")){
 
 require __DIR__ . DIRECTORY_SEPARATOR. 'vendor/autoload.php';
 
+const GET = "GET";
+const POST = "POST";
+const NONCE_HEADER = 'nonce';
+const ROUTE = 'paseo/v1';
+
 define( 'PLUGIN_VERSION', '0.0.1' );
 
 /**

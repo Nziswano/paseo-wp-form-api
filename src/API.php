@@ -153,7 +153,7 @@ class Api {
 		$this->loader->add_class_action('save_post', array('Paseo\Metaboxes\Metaboxes', 'save_meta')
 		);
 
-		$this->loader->add_class_action('rest_api_init', array('Paseo\Rest\Rest', 'register_route')
+		$this->loader->add_class_action('rest_api_init', array('Paseo\Rest\Routes', 'register_route')
 		);
 	}
 

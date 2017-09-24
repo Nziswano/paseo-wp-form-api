@@ -2,16 +2,6 @@
 namespace Paseo\Lib;
 
 /**
- * Register all actions and filters for the plugin
- *
- * @link       http://www.johan-martin.com
- * @since      1.0.0
- *
- * @package    Paseo_Wp_Form_Api
- * @subpackage Paseo_Wp_Form_Api/includes
- */
-
-/**
  * Register all actions and filters for the plugin.
  *
  * Maintain a list of all hooks that are registered throughout

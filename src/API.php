@@ -1,18 +1,6 @@
 <?php
-namespace Paseo;
 
-/**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
- * @link       http://www.johan-martin.com
- * @since      1.0.0
- *
- * @package    Paseo_Wp_Form_Api
- * @subpackage Paseo_Wp_Form_Api/includes
- */
+namespace Paseo;
 
 /**
  * The core plugin class.
@@ -28,6 +16,7 @@ namespace Paseo;
  * @subpackage Paseo_Wp_Form_Api/includes
  * @author     Johan Martin <johan@paseo.org.za>
  */
+
 class Api {
 
 	/**
@@ -152,14 +141,20 @@ class Api {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
-
-
 	}
 
+
+	/**
+	 * Register hooks in classes
+	 */
 	private function define_class_hooks() {
 		/* Meta Box */
 		$this->loader->add_class_action('add_meta_boxes', array('Paseo\Metaboxes\Metaboxes', 'custom_box') );
-		$this->loader->add_class_action('save_post', array('Paseo\Metaboxes\Metaboxes', 'save_meta') );
+		$this->loader->add_class_action('save_post', array('Paseo\Metaboxes\Metaboxes', 'save_meta')
+		);
+
+		$this->loader->add_class_action('rest_api_init', array('Paseo\Rest\Rest', 'register_route')
+		);
 	}
 
 	/**

@@ -10,6 +10,10 @@ namespace Paseo\Metaboxes;
 
 
 class Metaboxes {
+
+	/*
+	 * Create the custom box
+	 */
 	public static function custom_box() {
 		$screens = ['post', 'wporg_cpt'];
 		foreach( $screens as $screen ) {
@@ -22,6 +26,9 @@ class Metaboxes {
 		}
 	}
 
+	/**
+	 * @param $post
+	 */
 	public static function custom_box_html( $post ) {
 		?>
 		<label for="wporg_field">Description for this field</label>
@@ -35,6 +42,9 @@ class Metaboxes {
 
 	}
 
+	/**
+	 * @param $post_id
+	 */
 	public static function save_meta( $post_id ) {
 		if (array_key_exists( 'wporg_field', $_POST )) {
 			update_post_meta(

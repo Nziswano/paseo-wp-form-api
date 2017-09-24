@@ -5,16 +5,6 @@ namespace Paseo\Lib;
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       http://www.johan-martin.com
- * @since      1.0.0
- *
- * @package    Paseo_Wp_Form_Api
- * @subpackage Paseo_Wp_Form_Api/public
- */
-
-/**
- * The public-facing functionality of the plugin.
- *
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *

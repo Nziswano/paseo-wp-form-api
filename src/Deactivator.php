@@ -3,16 +3,6 @@
 namespace Paseo;
 
 /**
- * Fired during plugin deactivation
- *
- * @link       http://www.johan-martin.com
- * @since      1.0.0
- *
- * @package    Paseo_Wp_Form_Api
- * @subpackage Paseo_Wp_Form_Api/includes
- */
-
-/**
  * Fired during plugin deactivation.
  *
  * This class defines all code necessary to run during the plugin's deactivation.

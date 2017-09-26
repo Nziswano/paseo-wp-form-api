@@ -49,15 +49,17 @@ const GET = "GET";
 const POST = "POST";
 const NONCE_HEADER = 'nonce';
 const ROUTE = 'paseo/v1';
+const FINGERPRINT = 'fingerprint';
+const DB_TABLE = 'CONTACT_US';
 
-define( 'PLUGIN_VERSION', '0.0.1' );
+define( 'PASEO_WP_FORM_API_PLUGIN_VERSION', '0.0.1' );
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-paseo-wp-form-api-activator.php
  */
 function activate_paseo_wp_form_api() {
-	Paseo\Activator::activate();
+	Paseo\Lib\Activator::activate();
 }
 
 /**
@@ -65,7 +67,7 @@ function activate_paseo_wp_form_api() {
  * This action is documented in includes/class-paseo-wp-form-api-deactivator.php
  */
 function deactivate_paseo_wp_form_api() {
-	Paseo\Deactivator::deactivate();
+	Paseo\Lib\Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_paseo_wp_form_api' );
@@ -82,7 +84,7 @@ register_deactivation_hook( __FILE__, 'deactivate_paseo_wp_form_api' );
  */
 function run_paseo_wp_form_api() {
 
-	$plugin = new Paseo\Api();
+	$plugin = new Paseo\Main();
 	$plugin->run();
 
 }

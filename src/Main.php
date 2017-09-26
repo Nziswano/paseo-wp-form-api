@@ -17,7 +17,7 @@ namespace Paseo;
  * @author     Johan Martin <johan@paseo.org.za>
  */
 
-class Api {
+class Main {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -57,8 +57,8 @@ class Api {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'PLUGIN_VERSION' ) ) {
-			$this->version = PLUGIN_VERSION;
+		if ( defined( 'PASEO_WP_FORM_API_PLUGIN_VERSION' ) ) {
+			$this->version = PASEO_WP_FORM_API_PLUGIN_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
@@ -120,7 +120,7 @@ class Api {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Lib\AdminAPI( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Admin\Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -136,7 +136,7 @@ class Api {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Lib\PublicAPI( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Pub\Pub( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );

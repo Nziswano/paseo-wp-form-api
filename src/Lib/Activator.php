@@ -22,20 +22,20 @@ class Activator {
 	 */
 	public static function activate() {
 
-	// 	global $wpdb;
-	// 	$charset_collate = $wpdb->get_charset_collate();
-	// 	$table_name = $wpdb->prefix . 'contact_us';
+		global $wpdb;
+		$charset_collate = $wpdb->get_charset_collate();
+		$table_name = $wpdb->prefix . DB_TABLE;
 
-	// 	$sql = "CREATE TABLE $table_name (
-	// 	id mediumint(9) NOT NULL AUTO_INCREMENT,
-	// 	fingerprint VARCHAR(15) NOT NULL,
-	// 	contact_info JSON,
-	// 	created TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	// 	UNIQUE KEY id (id)
-	// ) $charset_collate;";
+		$sql = "CREATE TABLE $table_name (
+		id mediumint(9) NOT NULL AUTO_INCREMENT,
+		fingerprint VARCHAR(15) NOT NULL,
+		contact_info JSON,
+		created TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+		UNIQUE KEY id (id)
+	) $charset_collate;";
 
-	// 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-	// 	dbDelta( $sql );
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		dbDelta( $sql );
 
 	}
 

@@ -50,7 +50,7 @@ const POST = "POST";
 const NONCE_HEADER = 'nonce';
 const ROUTE = 'paseo/v1';
 const FINGERPRINT = 'fingerprint';
-const DB_TABLE = 'CONTACT_US';
+const DB_TABLE = 'contact_us';
 
 define( 'PASEO_WP_FORM_API_PLUGIN_VERSION', '0.0.1' );
 

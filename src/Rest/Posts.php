@@ -26,6 +26,7 @@ class Posts {
 	}
 	
 	/**
+     * @return mixed
 	*/
 	public static function update_post_meta($post_id, $user_finger) {
 		$result = NULL;

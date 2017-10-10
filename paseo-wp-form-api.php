@@ -51,6 +51,8 @@ const NONCE_HEADER = 'nonce';
 const ROUTE = 'paseo/v1';
 const FINGERPRINT = 'fingerprint';
 const DB_TABLE = 'contact_us';
+const CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
+const CAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
 
 define( 'PASEO_WP_FORM_API_PLUGIN_VERSION', '0.0.1' );
 

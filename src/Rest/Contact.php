@@ -74,8 +74,13 @@ class Contact {
      */
     public static function save_data($fingerprint, $data) {
         global $wpdb;
+        $wpdb->show_errors = TRUE;
         $table_name = $wpdb->prefix . DB_TABLE;
-        $wpdb->insert($table_name, array('fingerprint' => $fingerprint, 'contact_info' => $data));
-	    return $wpdb->insert_id;
+        $result = $wpdb->insert($table_name, array('fingerprint' => $fingerprint, 'contact_info' => $data));
+        if( !$result ) {
+            error_log($wpdb->print_error());
+            $result = $wpdb->print_error();
+        }
+	    return $result;
     }
 }

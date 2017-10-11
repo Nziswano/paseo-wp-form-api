@@ -28,7 +28,7 @@ class Activator {
 
 		$sql = "CREATE TABLE $table_name (
 		id mediumint(9) NOT NULL AUTO_INCREMENT,
-		fingerprint VARCHAR(15) NOT NULL,
+		fingerprint VARCHAR(75) NOT NULL,
 		contact_info JSON,
 		created TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 		UNIQUE KEY id (id)

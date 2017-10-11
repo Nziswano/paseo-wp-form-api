@@ -19,13 +19,15 @@ class Contact {
 	public static function contact_form( \WP_REST_Request $request ) {
 		$nonce_key = $request->get_header(FINGERPRINT);
 
-		if ( !$nonce_key ) {
+		if ( !$nonce_key )
+		{
 			$nonce_key = md5( $_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR'] );
 		}
 
 		$result = new \WP_REST_Response();
 
-		if ( GET == $request->get_method() ) {
+		if ( GET == $request->get_method() )
+		{
 			$nonce = wp_create_nonce( $nonce_key );
 			$result->header(NONCE_HEADER, $nonce_key);
 			$result->set_data(array("nonce" => $nonce_key));
@@ -35,13 +37,14 @@ class Contact {
 		{
 			$nonce = $request->get_header(NONCE_HEADER );
 			$nonce_verify = wp_verify_nonce($nonce, $nonce_key );
-			$data = $request->get_body_params();
+//			$data = $request->get_body_params();
 			$fingerprint = $request->get_param('fingerprint');
 			$captcha = $request->get_param('captcha');
 			$captcha_resolve = self::check_captcha($captcha);
-			$db_result = self::save_data($fingerprint, $data);
+			$db_result = self::save_data($fingerprint, $request);
 			$result->set_data(
 			    array(
+			        'nonce' => $nonce_verify,
 			        'db_result' => $db_result,
 			        'captcha_resolve' => $captcha_resolve
                 )
@@ -68,18 +71,27 @@ class Contact {
     }
 
     /**
-     * @param $data
+     * @param $request
      * @param $fingerprint
      * @return int
      */
-    public static function save_data($fingerprint, $data) {
+    public static function save_data($fingerprint, $request) {
         global $wpdb;
-        $wpdb->show_errors = TRUE;
+
         $table_name = $wpdb->prefix . DB_TABLE;
-        $result = $wpdb->insert($table_name, array('fingerprint' => $fingerprint, 'contact_info' => $data));
-        if( !$result ) {
-            error_log($wpdb->print_error());
-            $result = $wpdb->print_error();
+
+        $data = array (
+            'fullname' => $request->get_param('fullname'),
+            'message' => $request->get_param('message'),
+            'email' => $request->get_param('email'),
+            'telephone' => $request->get_param('telephone')
+        );
+
+        $result = $wpdb->insert($table_name, array('fingerprint' => $fingerprint, 'contact_info' => json_encode($data)));
+
+        if( !$result )
+        {
+            $result = $wpdb->last_error;
         }
 	    return $result;
     }

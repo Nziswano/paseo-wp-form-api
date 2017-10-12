@@ -30,10 +30,10 @@ class Contact {
 			$result->header(NONCE_HEADER, $nonce);
 			$result->header(PAS_CHECK, $my_key);
 			$result->header(\FINGERPRINT, $request->get_header(\FINGERPRINT));
+			$result->header( \CAPTCHA, \CAPTCHA_KEY);
 			$result->set_data(
 			    array(
-			        'pas_check' => $my_key,
-                    'pas_fingerprint' => $request->get_header(\FINGERPRINT)
+			        'captcha_site_key' => "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                 )
             );
 		}

@@ -22,6 +22,7 @@ class Contact {
 	public static function contact_form( \WP_REST_Request $request ) {
 
 		$result = new \WP_REST_Response();
+		$db_result = false;
 
 		if ( GET == $request->get_method() )
 		{
@@ -46,16 +47,13 @@ class Contact {
 			$fingerprint = $request->get_param('fingerprint');
 			$captcha = $request->get_param('captcha');
 			$captcha_resolve = self::check_captcha($captcha);
-			$db_result = self::save_data($fingerprint, $request);
-			$is_valid = self::is_valid($nonce_verify, $check_key, $captcha_resolve);
+            $is_valid = self::is_valid($nonce_verify, $check_key, $captcha_resolve);
+            if( $is_valid ) {
+                $db_result = self::save_data($fingerprint, $request);
+            }
+			$is_valid = ( $is_valid && $db_result );
 			$result->set_data(
 			    array(
-//			        'pas_check' => $request->get_header(\PAS_CHECK),
-//			        'pas_fingerprint' => $request->get_header(\FINGERPRINT),
-//			        'check_key' => $check_key,
-//			        'nonce_result' => $nonce_verify,
-//			        'db_result' => $db_result,
-//			        'captcha_resolve' => $captcha_resolve->success,
                     'is_valid' => $is_valid
                 )
             );

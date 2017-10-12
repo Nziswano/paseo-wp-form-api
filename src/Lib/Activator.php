@@ -39,7 +39,7 @@ class Activator {
 
 	}
 
-		/**
+    /**
 	 * Short Description. (use period)
 	 *
 	 * Long Description.

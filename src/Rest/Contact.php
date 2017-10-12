@@ -8,6 +8,9 @@
 
 namespace Paseo\Rest;
 
+const NONCE_ACTION = 'Contact';
+const MY_SALT = 'aljlagjdljlkjsdgladgjklkjeioa';
+
 
 class Contact {
 
@@ -17,36 +20,43 @@ class Contact {
 	 * @return mixed
 	 */
 	public static function contact_form( \WP_REST_Request $request ) {
-		$nonce_key = $request->get_header(FINGERPRINT);
-
-		if ( !$nonce_key )
-		{
-			$nonce_key = md5( $_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR'] );
-		}
 
 		$result = new \WP_REST_Response();
 
 		if ( GET == $request->get_method() )
 		{
-			$nonce = wp_create_nonce( $nonce_key );
-			$result->header(NONCE_HEADER, $nonce_key);
-			$result->set_data(array("nonce" => $nonce_key));
+            $nonce = \wp_create_nonce(NONCE_ACTION);
+            $my_key = self::get_hash($request->get_header(\FINGERPRINT));
+			$result->header(NONCE_HEADER, $nonce);
+			$result->header(PAS_CHECK, $my_key);
+			$result->header(\FINGERPRINT, $request->get_header(\FINGERPRINT));
+			$result->set_data(
+			    array(
+			        'pas_check' => $my_key,
+                    'pas_fingerprint' => $request->get_header(\FINGERPRINT)
+                )
+            );
 		}
 
 		if ( POST == $request->get_method() )
 		{
 			$nonce = $request->get_header(NONCE_HEADER );
-			$nonce_verify = wp_verify_nonce($nonce, $nonce_key );
-//			$data = $request->get_body_params();
+			$nonce_verify = wp_verify_nonce($nonce, NONCE_ACTION );
+			$check_key =  self::verify_hash($request->get_header(\FINGERPRINT), $request->get_header(\PAS_CHECK));
 			$fingerprint = $request->get_param('fingerprint');
 			$captcha = $request->get_param('captcha');
 			$captcha_resolve = self::check_captcha($captcha);
 			$db_result = self::save_data($fingerprint, $request);
+			$is_valid = self::is_valid($nonce_verify, $check_key, $captcha_resolve);
 			$result->set_data(
 			    array(
-			        'nonce' => $nonce_verify,
-			        'db_result' => $db_result,
-			        'captcha_resolve' => $captcha_resolve
+//			        'pas_check' => $request->get_header(\PAS_CHECK),
+//			        'pas_fingerprint' => $request->get_header(\FINGERPRINT),
+//			        'check_key' => $check_key,
+//			        'nonce_result' => $nonce_verify,
+//			        'db_result' => $db_result,
+//			        'captcha_resolve' => $captcha_resolve->success,
+                    'is_valid' => $is_valid
                 )
             );
 		}
@@ -67,7 +77,33 @@ class Contact {
             )
         );
         $response = wp_remote_post( \CAPTCHA_URL, $args);
-        return \wp_remote_retrieve_body( $response );
+        $data = json_decode(\wp_remote_retrieve_body( $response ));
+        return $data;
+    }
+
+
+    /**
+     * @param $header - request header
+     * @return string
+     */
+    public static function get_hash($key) {
+	    return md5($key + MY_SALT);
+    }
+
+    public static function verify_hash($key, $hash) {
+        return ( $hash == self::get_hash($key) );
+    }
+
+    /**
+     * Verify that the data and response is valid.
+     * @param $nonce_verify
+     * @param $check_key
+     * @param $captcha_resolve
+     * @return boolean
+     */
+    public static function is_valid($nonce_verify, $check_key, $captcha_resolve) {
+        $result = $nonce_verify && $check_key && $captcha_resolve->success;
+        return $result;
     }
 
     /**

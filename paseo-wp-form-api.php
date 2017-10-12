@@ -47,12 +47,13 @@ require __DIR__ . DIRECTORY_SEPARATOR. 'vendor/autoload.php';
 
 const GET = "GET";
 const POST = "POST";
-const NONCE_HEADER = 'nonce';
 const ROUTE = 'paseo/v1';
-const FINGERPRINT = 'fingerprint';
+const FINGERPRINT = 'PAS-Fingerprint';
 const DB_TABLE = 'contact_us';
 const CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
 const CAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
+const NONCE_HEADER = 'PAS-Nonce';
+const PAS_CHECK = 'PAS-Check';
 
 define( 'PASEO_WP_FORM_API_PLUGIN_VERSION', '0.0.1' );
 
@@ -66,7 +67,24 @@ define( 'PASEO_WP_FORM_API_PLUGIN_VERSION', '0.0.1' );
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-paseo-wp-form-api-deactivator.php
  */
-register_deactivation_hook( __FILE__, array('Paseo\Lib\Activator', 'deactivate') );
+ register_deactivation_hook( __FILE__, array('Paseo\Lib\Activator', 'deactivate') );
+
+/**
+ * Use * for origin
+ */
+ add_action( 'rest_api_init', function() {
+
+ remove_filter( 'rest_pre_serve_request', 'rest_send_cors_headers' );
+ add_filter( 'rest_pre_serve_request', function( $value ) {
+ 	header( 'Access-Control-Allow-Origin: *' );
+ 	header( 'Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE' );
+ 	header( 'Access-Control-Allow-Credentials: true' );
+ 	header( 'Access-Control-Expose-Headers: X-WP-Total, X-WP-TotalPages, PAS-Fingerprint, PAS-Check, PAS-Nonce');
+ 	header('Access-Control-Allow-Headers: Authorization, Content-Type, PAS-Nonce, PAS-Fingerprint, PAS-Check');
+ 	return $value;
+ });
+ }, 15 );
+
 
 /**
  * Begins execution of the plugin.

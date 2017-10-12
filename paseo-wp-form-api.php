@@ -52,8 +52,8 @@ const FINGERPRINT = 'PAS-Fingerprint';
 const CAPTCHA = 'PAS-Captcha';
 const DB_TABLE = 'contact_us';
 const CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
-const CAPTCHA_SECRET = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
-const CAPTCHA_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
+const CAPTCHA_SECRET = '6Ld3_zEUAAAAAM1qlESqZB4TAgeyDgYRUsMYxX9U';
+const CAPTCHA_KEY = '6Ld3_zEUAAAAAJZ9rVCgZzbceT1IFyc1gCHzH-sM';
 const NONCE_HEADER = 'PAS-Nonce';
 const PAS_CHECK = 'PAS-Check';
 

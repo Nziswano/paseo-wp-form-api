@@ -102,7 +102,7 @@ class Admin {
 	}
 
 	public function contact_us_form_menu() {
-        add_options_page( $this->settings['page_title'],
+        add_plugins_page( $this->settings['page_title'],
             $this->settings['menu_title'],
             $this->settings['capability'],
             $this->settings['menu_slug'],
@@ -116,10 +116,90 @@ class Admin {
         if ( !current_user_can( 'manage_options' ) )  {
             wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
         }
-        echo '<div class="wrap">';
-        echo '<p>Here is where the form would go if I actually had options.</p>';
-        echo '</div>';
+?>
+        <div class="wrap">
+<h2>Contact Us Form Settings</h2>
+            <?php
+            $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'contact_list';
+            ?>
+            <h2 class="nav-tab-wrapper">
+                <a href="?page=paseo-contact-us-form&tab=contact_list" class="nav-tab <?php echo $active_tab == 'contact_list' ? 'nav-tab-active' : ''; ?>">Contacts List</a>
+                <a href="?page=paseo-contact-us-form&tab=settings" class="nav-tab" <?php echo $active_tab == 'settings' ? 'nav-tab-active' : ''; ?>>Settings</a>
+            </h2>
+<form action="options.php" method="post">
 
+<?php
+    if ($active_tab == 'contact_list') {
+        echo "contact list";
+    } else {
+        settings_fields($this->settings['menu_slug']);
+        do_settings_sections($this->settings['menu_slug']);
+    }
+ ?>
+
+<input name="Submit" type="submit" value="<?php esc_attr_e('Save Changes'); ?>" />
+</form>
+        </div>
+<?php
+
+    }
+
+
+    public function plugin_admin_init()
+    {
+
+        add_settings_section(
+            'captcha_settings',
+            'Captcha Settings',
+            array($this,'plugin_section_text'),
+            $this->settings['menu_slug']);
+
+        add_settings_field(
+            'captcha_key',
+            'Captcha Public Key',
+            array($this, 'captcha_public_string'),
+            $this->settings['menu_slug'],
+            'captcha_settings');
+
+        add_settings_field(
+            'captcha_secret',
+            'Captcha Secret Key',
+            array($this, 'captcha_secret_string'),
+            $this->settings['menu_slug'],
+            'captcha_settings'
+        );
+
+        register_setting(
+            $this->settings['menu_slug'],
+            'captcha_key'
+            );
+
+        register_setting(
+            $this->settings['menu_slug'],
+            'captcha_secret'
+        );
+    }
+
+    public function plugin_section_text() {
+        echo '<p>Captcha Related Settings</p>';
+    }
+
+    public function captcha_public_string() {
+        $key = get_option('captcha_key');
+        echo "<input id='captcha_key' name='captcha_key' size='40' type='text' value='{$key}' />";
+    }
+
+    public function captcha_secret_string() {
+        $secret = get_option('captcha_secret');
+        echo "<input id='captcha_secret' name='captcha_secret' size='40' type='text' value='{$secret}' />";
+    }
+
+    public function plugin_options_validate($input) {
+        $newinput['text_string'] = trim($input['text_string']);
+        if(!preg_match('/^[a-z0-9]{32}$/i', $newinput['text_string'])) {
+            $newinput['text_string'] = '';
+        }
+        return $newinput;
     }
 
 }

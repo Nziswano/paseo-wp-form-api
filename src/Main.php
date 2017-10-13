@@ -124,6 +124,8 @@ class Main {
 
 		$this->loader->add_action('admin_menu', $plugin_admin, 'contact_us_form_menu');
 
+		$this->loader->add_action('admin_init', $plugin_admin,'plugin_admin_init');
+
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 

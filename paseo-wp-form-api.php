@@ -52,8 +52,6 @@ const FINGERPRINT = 'PAS-Fingerprint';
 const CAPTCHA = 'PAS-Captcha';
 const DB_TABLE = 'contact_us';
 const CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
-//const CAPTCHA_SECRET = '6Ld3_zEUAAAAAM1qlESqZB4TAgeyDgYRUsMYxX9U';
-//const CAPTCHA_KEY = '6Ld3_zEUAAAAAJZ9rVCgZzbceT1IFyc1gCHzH-sM';
 const NONCE_HEADER = 'PAS-Nonce';
 const PAS_CHECK = 'PAS-Check';
 
@@ -70,22 +68,6 @@ define( 'PASEO_WP_FORM_API_PLUGIN_VERSION', '0.0.1' );
  * This action is documented in includes/class-paseo-wp-form-api-deactivator.php
  */
  register_deactivation_hook( __FILE__, array('Paseo\Lib\Activator', 'deactivate') );
-
-/**
- * Use * for origin
- */
- add_action( 'rest_api_init', function() {
-
- remove_filter( 'rest_pre_serve_request', 'rest_send_cors_headers' );
- add_filter( 'rest_pre_serve_request', function( $value ) {
- 	header( 'Access-Control-Allow-Origin: *' );
- 	header( 'Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE' );
- 	header( 'Access-Control-Allow-Credentials: true' );
- 	header( 'Access-Control-Expose-Headers: X-WP-Total, X-WP-TotalPages, PAS-Fingerprint, PAS-Check, PAS-Nonce, PAS-Captcha');
- 	header('Access-Control-Allow-Headers: Authorization, Content-Type, PAS-Nonce, PAS-Fingerprint, PAS-Check');
- 	return $value;
- });
- }, 15 );
 
 
 /**

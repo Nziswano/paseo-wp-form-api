@@ -51,7 +51,7 @@ const ROUTE = 'paseo/v1';
 const FINGERPRINT = 'PAS-Fingerprint';
 const CAPTCHA = 'PAS-Captcha';
 const DB_TABLE = 'contact_us';
-const CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
+//const CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
 const NONCE_HEADER = 'PAS-Nonce';
 const PAS_CHECK = 'PAS-Check';
 

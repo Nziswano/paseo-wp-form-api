@@ -116,6 +116,8 @@ class Admin {
         if ( !current_user_can( 'manage_options' ) )  {
             wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
         }
+        $data = array('username'=>'jane_doe');
+        \Timber::render_string('Hi {{username}} means timber is working ', $data);
 ?>
         <div class="wrap">
 <h2>Contact Us Form Settings</h2>

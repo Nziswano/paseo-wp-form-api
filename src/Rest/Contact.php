@@ -9,8 +9,6 @@
 namespace Paseo\Rest;
 
 const NONCE_ACTION = 'Contact';
-const MY_SALT = 'aljlagjdljlkjsdgladgjklkjeioa';
-
 
 class Contact {
 

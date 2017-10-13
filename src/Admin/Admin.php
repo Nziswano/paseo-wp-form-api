@@ -32,6 +32,13 @@ class Admin {
 	 */
 	private $version;
 
+	private $settings = array (
+	    'page_title' => 'Paseo Contact Us List',
+        'menu_title' => 'Paseo Contact Us',
+        'capability' => 'manage_options',
+        'menu_slug'  => 'paseo-contact-us-form'
+    );
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -65,7 +72,7 @@ class Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'site/admin/css/paseo-wp-form-api-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . '../../site/admin/css/paseo-wp-form-api-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -88,8 +95,31 @@ class Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'site/admin/js/paseo-wp-form-api-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name,
+            plugin_dir_url( __FILE__ ) . '../../site/admin/js/paseo-wp-form-api-admin.js', array( 'jquery' ),
+            $this->version, false );
 
 	}
+
+	public function contact_us_form_menu() {
+        add_options_page( $this->settings['page_title'],
+            $this->settings['menu_title'],
+            $this->settings['capability'],
+            $this->settings['menu_slug'],
+            array($this, 'contact_us_form_options') );
+    }
+
+    /*
+     * Plugin Options
+     */
+    public function contact_us_form_options() {
+        if ( !current_user_can( 'manage_options' ) )  {
+            wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+        }
+        echo '<div class="wrap">';
+        echo '<p>Here is where the form would go if I actually had options.</p>';
+        echo '</div>';
+
+    }
 
 }

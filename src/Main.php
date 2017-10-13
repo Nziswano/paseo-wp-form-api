@@ -122,6 +122,8 @@ class Main {
 
 		$plugin_admin = new Admin\Admin( $this->get_plugin_name(), $this->get_version() );
 
+		$this->loader->add_action('admin_menu', $plugin_admin, 'contact_us_form_menu');
+
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
@@ -148,13 +150,8 @@ class Main {
 	 * Register hooks in classes
 	 */
 	private function define_class_hooks() {
-		/* Meta Box */
-		$this->loader->add_class_action('add_meta_boxes', array('Paseo\Metaboxes\Metaboxes', 'custom_box') );
-		$this->loader->add_class_action('save_post', array('Paseo\Metaboxes\Metaboxes', 'save_meta')
-		);
 
-		$this->loader->add_class_action('rest_api_init', array('Paseo\Rest\Routes', 'register_route')
-		);
+		$this->loader->add_class_action('rest_api_init', array('Paseo\Rest\Routes', 'register_route'));
 	}
 
 	/**

@@ -15,8 +15,8 @@ class Settings
      * @var array
      */
     protected static $settings = array (
-        'page_title' => 'Paseo Contact Us List',
-        'menu_title' => 'Paseo Contact Us',
+        'page_title' => 'Paseo Settings',
+        'menu_title' => 'Paseo Settings',
         'capability' => 'manage_options',
         'menu_slug'  => 'paseo-contact-us-form'
     );

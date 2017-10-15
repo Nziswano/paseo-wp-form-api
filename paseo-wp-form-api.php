@@ -69,14 +69,14 @@ define( 'PASEO_WP_FORM_API_PLUGIN_VERSION', '0.0.1' );
  */
  register_deactivation_hook( __FILE__, array('Paseo\Lib\Activator', 'deactivate') );
 
-add_action( 'init', function(){
-    $assets_url = plugin_dir_url( __FILE__ ) . 'site/admin';
-    //Setup menu
-    if( is_admin() ){
-        new Paseo\Admin\Settings( $assets_url );
-    }
-
-});
+//add_action( 'init', function(){
+//    $assets_url = plugin_dir_url( __FILE__ ) . 'site/admin';
+//    //Setup menu
+//    if( is_admin() ){
+//        new Paseo\Admin\Settings( $assets_url );
+//    }
+//
+//});
 
 
 /**

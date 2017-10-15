@@ -32,6 +32,11 @@ class Admin {
 	 */
 	private $version;
 
+    /**
+     * @var string $assets_url path to the assets folder
+     */
+	private $assets_url;
+
 	private $settings = array (
 	    'page_title' => 'Paseo Contact Us List',
         'menu_title' => 'Paseo Contact Us',
@@ -50,8 +55,23 @@ class Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
+		$this->assets_url = $this->get_assets_url();
 	}
+
+    /**
+     * @return string
+     */
+	protected function get_assets_url() {
+	    return plugin_dir_url(__FILE__) . '../../site/';
+    }
+
+    /**
+     *
+     */
+    public function add_settings_page() {
+	    $settings = new Settings\Settings($this->assets_url);
+	    $settings->add_page();
+    }
 
 	/**
 	 * Register the stylesheets for the admin area.
@@ -71,9 +91,13 @@ class Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . '../../site/admin/css/paseo-wp-form-api-admin.css', array(), $this->version, 'all' );
-
+		wp_enqueue_style(
+		    $this->plugin_name,
+            $this->assets_url . 'admin/css/paseo-wp-form-api-admin.css',
+            array(),
+            $this->version,
+            'all'
+        );
 	}
 
 	/**
@@ -94,118 +118,13 @@ class Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_script( $this->plugin_name,
-            plugin_dir_url( __FILE__ ) . '../../site/admin/js/paseo-wp-form-api-admin.js', array( 'jquery' ),
-            $this->version, false );
-
+		wp_enqueue_script(
+		    $this->plugin_name,
+            $this->assets_url . 'admin/js/paseo-wp-form-api-admin.js',
+            array( 'jquery', 'backbone'),
+            $this->version,
+            false
+        );
 	}
-
-	public function init_setting() {
-
-    }
-
-	public function contact_us_form_menu() {
-        add_plugins_page( $this->settings['page_title'],
-            $this->settings['menu_title'],
-            $this->settings['capability'],
-            $this->settings['menu_slug'],
-            array($this, 'contact_us_form_options') );
-    }
-
-    /*
-     * Plugin Options
-     */
-    public function contact_us_form_options() {
-        if ( !current_user_can( 'manage_options' ) )  {
-            wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-        }
-        $data = array('username'=>'jane_doe');
-        \Timber::render_string('Hi {{username}} means timber is working ', $data);
-?>
-        <div class="wrap">
-<h2>Contact Us Form Settings</h2>
-            <?php
-            $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'contact_list';
-            ?>
-            <h2 class="nav-tab-wrapper">
-                <a href="?page=paseo-contact-us-form&tab=contact_list" class="nav-tab <?php echo $active_tab == 'contact_list' ? 'nav-tab-active' : ''; ?>">Contacts List</a>
-                <a href="?page=paseo-contact-us-form&tab=settings" class="nav-tab" <?php echo $active_tab == 'settings' ? 'nav-tab-active' : ''; ?>>Settings</a>
-            </h2>
-<form action="options.php" method="post">
-
-<?php
-    if ($active_tab == 'contact_list') {
-        echo "contact list";
-    } else {
-        settings_fields($this->settings['menu_slug']);
-        do_settings_sections($this->settings['menu_slug']);
-    }
- ?>
-
-<input name="Submit" type="submit" value="<?php esc_attr_e('Save Changes'); ?>" />
-</form>
-        </div>
-<?php
-
-    }
-
-
-    public function plugin_admin_init()
-    {
-
-        add_settings_section(
-            'captcha_settings',
-            'Captcha Settings',
-            array($this,'plugin_section_text'),
-            $this->settings['menu_slug']);
-
-        add_settings_field(
-            'captcha_key',
-            'Captcha Public Key',
-            array($this, 'captcha_public_string'),
-            $this->settings['menu_slug'],
-            'captcha_settings');
-
-        add_settings_field(
-            'captcha_secret',
-            'Captcha Secret Key',
-            array($this, 'captcha_secret_string'),
-            $this->settings['menu_slug'],
-            'captcha_settings'
-        );
-
-        register_setting(
-            $this->settings['menu_slug'],
-            'captcha_key'
-            );
-
-        register_setting(
-            $this->settings['menu_slug'],
-            'captcha_secret'
-        );
-    }
-
-    public function plugin_section_text() {
-        echo '<p>Captcha Related Settings</p>';
-    }
-
-    public function captcha_public_string() {
-        $key = get_option('captcha_key');
-        echo "<input id='captcha_key' name='captcha_key' size='40' type='text' value='{$key}' />";
-    }
-
-    public function captcha_secret_string() {
-        $secret = get_option('captcha_secret');
-        echo "<input id='captcha_secret' name='captcha_secret' size='40' type='text' value='{$secret}' />";
-    }
-
-    public function plugin_options_validate($input) {
-        $newinput['text_string'] = trim($input['text_string']);
-        if(!preg_match('/^[a-z0-9]{32}$/i', $newinput['text_string'])) {
-            $newinput['text_string'] = '';
-        }
-        return $newinput;
-    }
 
 }

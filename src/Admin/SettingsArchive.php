@@ -9,7 +9,7 @@
 namespace Paseo\Admin;
 
 
-class Settings
+class SettingsArchive
 {
     protected $slug = 'demo-menu';
 
@@ -20,8 +20,8 @@ class Settings
     public function __construct($assets_url)
     {
         $this->assets_url = $assets_url;
-        \add_action('admin_menu', array($this, 'add_page'));
-        \add_action('admin_enque_scripts', array($this, 'register_assets'));
+//        \add_action('admin_menu', array($this, 'add_page'));
+//        \add_action('admin_enque_scripts', array($this, 'register_assets'));
     }
 
     public function add_page(){
@@ -104,7 +104,7 @@ class Settings
      */
     public static function get_settings(){
         $saved = get_option( self::$option_key, array() );
-        if( !is_array( $saved ) || empty( $saved )){
+        if( ! is_array( $saved ) || ! empty( $saved )){
             return self::$defaults;
         }
         return wp_parse_args( $saved, self::$defaults );
@@ -123,14 +123,9 @@ class Settings
                 unset( $settings[ $i ] );
             }
         }
-        if( get_option( self::$option_key) !== false ) {
-            update_option( self::$option_key, $settings );
-        }
-        else {
-            add_option( self::$option_key, $settings);
-        }
+        if( get_option())
 
-
+        update_option( self::$option_key, $settings );
     }
 
     /**
@@ -151,13 +146,13 @@ class Settings
             'industry' => $request->get_param( 'industry' ),
             'amount' => $request->get_param( 'amount' )
         );
-        Settings::save_settings( $settings );
-        $test_data = Settings::get_settings();
-        return rest_ensure_response( Settings::get_settings())->set_status( 201 );
+        SettingsArchive::save_settings( $settings );
+        $test_data = SettingsArchive::get_settings();
+//        return rest_ensure_response( Settings::get_settings())->set_status( 201 );
 //        $response = new \WP_Error(21, 'this is an error');
-//        $response = new \WP_REST_Response();
-//        $response->set_data(array('data' => $settings, 'test_data'=> $test_data));
-//        return $response;
+        $response = new \WP_REST_Response();
+        $response->set_data(array('data' => $settings, 'test_data'=> $test_data));
+        return $response;
     }
     /**
      * Get settings via API
@@ -166,8 +161,6 @@ class Settings
      * @return \WP_REST_Response
      */
     public static function settings( \WP_REST_Request $request ){
-        $settings = Settings::get_settings();
-        \PC::debug($settings, 'Current settings');
-        return rest_ensure_response( $settings);
+        return rest_ensure_response( SettingsArchive::get_settings());
     }
 }

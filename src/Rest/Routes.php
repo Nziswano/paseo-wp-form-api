@@ -19,29 +19,20 @@ class Routes {
 			)
 		);
 
-		register_rest_route(ROUTE, '/posts',
-			array(
-				'methods' => \WP_REST_Server::READABLE,
-				'callback' => array('Paseo\Rest\Posts', 'posts')
-			)
-		);
-		/** demo routes */
-
         register_rest_route( \ROUTE, '/settings',
             array(
                 'methods'         => 'POST',
-                'callback'        => array( 'Paseo\Admin\Settings', 'update_settings' ),
-                'permissions_callback' => array( 'Paseo\Admin\Settings', 'permissions' )
+                'callback'        => array( 'Paseo\Admin\Settings\Settings', 'update_settings' ),
+                'permissions_callback' => array( 'Paseo\Admin\Settings\Settings', 'permissions' )
             )
         );
         register_rest_route( ROUTE, '/settings',
             array(
                 'methods'         => 'GET',
-                'callback'        => array( 'Paseo\Admin\Settings', 'settings' ),
-                'permissions_callback' => array( 'Paseo\Admin\Settings', 'permissions' )
+                'callback'        => array( 'Paseo\Admin\Settings\Settings', 'check_settings' ),
+                'permissions_callback' => array( 'Paseo\Admin\Settings\Settings', 'permissions' )
             )
         );
-
 
         /* Set header information */
         remove_filter( 'rest_pre_serve_request', 'rest_send_cors_headers' );
@@ -54,7 +45,4 @@ class Routes {
             return $value;
         });
 	}
-
-
-
 }

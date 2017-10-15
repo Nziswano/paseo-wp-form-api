@@ -101,6 +101,10 @@ class Admin {
 
 	}
 
+	public function init_setting() {
+
+    }
+
 	public function contact_us_form_menu() {
         add_plugins_page( $this->settings['page_title'],
             $this->settings['menu_title'],

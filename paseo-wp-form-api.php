@@ -43,7 +43,7 @@ if (version_compare($wp_version, "4.7", "<")){
 	exit( $exit_message );
 }
 
-require __DIR__ . DIRECTORY_SEPARATOR. 'vendor/autoload.php';
+require ABSPATH . '../vendor/autoload.php';
 
 const GET = "GET";
 const POST = "POST";
@@ -68,6 +68,15 @@ define( 'PASEO_WP_FORM_API_PLUGIN_VERSION', '0.0.1' );
  * This action is documented in includes/class-paseo-wp-form-api-deactivator.php
  */
  register_deactivation_hook( __FILE__, array('Paseo\Lib\Activator', 'deactivate') );
+
+add_action( 'init', function(){
+    $assets_url = plugin_dir_url( __FILE__ ) . 'site/admin';
+    //Setup menu
+    if( is_admin() ){
+        new Paseo\Admin\Settings( $assets_url );
+    }
+
+});
 
 
 /**

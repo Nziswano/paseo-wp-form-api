@@ -83,7 +83,7 @@ class Contact {
      * @return string
      */
     public static function get_hash($key) {
-	    return md5($key + MY_SALT);
+	    return md5($key . MY_SALT);
     }
 
     public static function verify_hash($key, $hash) {

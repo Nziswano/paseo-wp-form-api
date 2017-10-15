@@ -6,7 +6,7 @@
  * Time: 23:15
  */
 
-namespace Paseo\Rest;
+namespace Paseo\Contact;
 
 const NONCE_ACTION = 'Contact';
 

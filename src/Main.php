@@ -29,6 +29,11 @@ class Main {
 	 */
 	protected $loader;
 
+    /**
+     * @var path to assets.
+     */
+	protected $site_asset_path;
+
 	/**
 	 * The unique identifier of this plugin.
 	 *
@@ -63,6 +68,7 @@ class Main {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'paseo-wp-form-api';
+		$this->site_asset_path = $this->get_assets_url();
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -71,6 +77,14 @@ class Main {
 		$this->define_class_hooks();
 
 	}
+
+    /**
+     * Set path to assets.
+     * @return string
+     */
+    protected function get_assets_url() {
+        return plugin_dir_url(__FILE__) . '../site/';
+    }
 
 	/**
 	 * Load the required dependencies for this plugin.
@@ -120,14 +134,24 @@ class Main {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Admin\Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Admin\Admin( $this->get_plugin_name(), $this->get_version(), $this->get_assets_url() );
 
-		$this->loader->add_action('admin_menu', $plugin_admin, 'add_settings_page');
+		$this->loader->add_action(
+		    'admin_menu',
+            $plugin_admin,
+            'add_settings_page'
+        );
 
-//		$this->loader->add_action('admin_menu', $plugin_admin, 'contact_us_form_menu');
-//		$this->loader->add_action('admin_init', $plugin_admin,'plugin_admin_init');
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action(
+		    'admin_enqueue_scripts',
+            $plugin_admin,
+            'enqueue_styles' );
+
+		$this->loader->add_action(
+		    'admin_enqueue_scripts',
+            $plugin_admin,
+            'enqueue_scripts'
+        );
 
 	}
 
@@ -140,7 +164,7 @@ class Main {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Pub\Pub( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Pub\Pub( $this->get_plugin_name(), $this->get_version(), $this->get_assets_url() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -153,7 +177,10 @@ class Main {
 	 */
 	private function define_class_hooks() {
 
-		$this->loader->add_class_action('rest_api_init', array('Paseo\Rest\Routes', 'register_route'));
+		$this->loader->add_class_action(
+		    'rest_api_init',
+            array('Paseo\Rest\Routes', 'register_route')
+        );
 	}
 
 	/**

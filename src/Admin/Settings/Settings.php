@@ -8,6 +8,12 @@
 
 namespace Paseo\Admin\Settings;
 
+const SETTINGS_CAPTCHA_PUBLIC_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+const SETTINGS_CAPTCHA_PRIVATE_KEY = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
+const SETTINGS_CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
+const SETTINGS_OPTION_KEY = '_paseo_captcha_settings';
+const SETTINGS_PERMISSIONS = 'manage_options';
+
 
 class Settings
 {
@@ -22,18 +28,20 @@ class Settings
     );
 
     /**
+     * Default demo settings for captcha
      * @var array
      */
     public static $defaults = array(
-      'captcha_public_key'  => '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
-      'captcha_private_key' => '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe',
-      'captcha_url'         => 'https://www.google.com/recaptcha/api/siteverify'
+        'captcha_public_key'    => SETTINGS_CAPTCHA_PUBLIC_KEY,
+        'captcha_private_key'   => SETTINGS_CAPTCHA_PRIVATE_KEY,
+        'captcha_url'           => SETTINGS_CAPTCHA_URL,
+        'captcha_enabled'       => true
     );
 
     /**
      * @var string
      */
-    public static $permissions = 'manage_options';
+    public static $permissions = SETTINGS_PERMISSIONS;
 
     /**
      * @var string
@@ -43,7 +51,7 @@ class Settings
     /**
      * @var string
      */
-    protected static $option_key = '_paseo_captcha_settings';
+    protected static $option_key = SETTINGS_OPTION_KEY;
 
     public function __construct($assets_url)
     {

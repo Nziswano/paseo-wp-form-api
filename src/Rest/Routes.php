@@ -15,7 +15,7 @@ class Routes {
 		register_rest_route(ROUTE, '/contact-us/',
 			array(
 				'methods' => 'GET, POST',
-				'callback' => array('Paseo\Rest\Contact', 'contact_form')
+				'callback' => array('Paseo\Contact\Contact', 'contact_form')
 			)
 		);
 

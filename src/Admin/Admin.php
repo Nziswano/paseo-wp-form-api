@@ -50,8 +50,9 @@ class Admin {
 	 * @since    1.0.0
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
+     * @param      string    $assets_url
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $plugin_name, $version, $assets_url = null ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;

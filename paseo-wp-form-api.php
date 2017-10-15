@@ -51,7 +51,6 @@ const ROUTE = 'paseo/v1';
 const FINGERPRINT = 'PAS-Fingerprint';
 const CAPTCHA = 'PAS-Captcha';
 const DB_TABLE = 'contact_us';
-//const CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
 const NONCE_HEADER = 'PAS-Nonce';
 const PAS_CHECK = 'PAS-Check';
 
@@ -68,15 +67,6 @@ define( 'PASEO_WP_FORM_API_PLUGIN_VERSION', '0.0.1' );
  * This action is documented in includes/class-paseo-wp-form-api-deactivator.php
  */
  register_deactivation_hook( __FILE__, array('Paseo\Lib\Activator', 'deactivate') );
-
-//add_action( 'init', function(){
-//    $assets_url = plugin_dir_url( __FILE__ ) . 'site/admin';
-//    //Setup menu
-//    if( is_admin() ){
-//        new Paseo\Admin\Settings( $assets_url );
-//    }
-//
-//});
 
 
 /**

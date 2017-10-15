@@ -32,17 +32,21 @@ class Pub {
 	 */
 	private $version;
 
+	private $assets_url;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
+     * @param       string   $assets_url path to assets.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $plugin_name, $version, $assets_url ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->assets_url = $assets_url;
 
 	}
 
@@ -65,7 +69,7 @@ class Pub {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'site/public/css/paseo-wp-form-api-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, $this->assets_url.  'public/css/paseo-wp-form-api-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -88,7 +92,7 @@ class Pub {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'site/public/js/paseo-wp-form-api-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, $this->assets_url . 'public/js/paseo-wp-form-api-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 

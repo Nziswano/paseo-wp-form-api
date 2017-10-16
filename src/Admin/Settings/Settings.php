@@ -7,6 +7,7 @@
  */
 
 namespace Paseo\Admin\Settings;
+use Timber\Timber;
 
 
 
@@ -22,7 +23,7 @@ class Settings
     const SETTINGS_PERMISSIONS = 'manage_options';
     const SETTINGS_ASSETS_JS = '/admin/js/admin.js';
     const SETTINGS_ASSETS_CSS = '/admin/css/admin.css';
-    const SETTINGS_VAR = 'PASEO-FORM';
+    const SETTINGS_VAR = 'PASEOFORM';
     const SETTINGS_ROUTE = '/settings';
 
     /**
@@ -56,6 +57,7 @@ class Settings
      */
     private $assets_url;
 
+
     /**
      * @var string
      */
@@ -64,8 +66,6 @@ class Settings
     public function __construct($assets_url)
     {
         $this->assets_url = $assets_url;
-
-
     }
 
     public function add_page(){
@@ -111,7 +111,9 @@ class Settings
      * Render Page
      */
     public function render_admin() {
-        $timber = new \Timber();
+        $this->enqueue_assets();
+        Timber::render('admin.twig');
+
     }
 
     /**

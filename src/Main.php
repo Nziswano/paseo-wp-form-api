@@ -20,7 +20,7 @@ use Timber\Timber;
 
 class Main {
 
-    const TEMPLATES = '/templates';
+    const TEMPLATES = '../site/templates';
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -73,7 +73,7 @@ class Main {
 		$this->plugin_name = 'paseo-wp-form-api';
 		$this->site_asset_path = $this->get_assets_url();
 
-        Timber::$locations = $this->get_assets_url() . self::TEMPLATES;
+        Timber::$locations = plugin_dir_path(__FILE__) . self::TEMPLATES;
 
 		$this->load_dependencies();
 		$this->set_locale();

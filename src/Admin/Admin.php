@@ -50,27 +50,19 @@ class Admin {
 	 * @since    1.0.0
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
-     * @param      string    $assets_url
 	 */
-	public function __construct( $plugin_name, $version, $assets_url = null ) {
-
+	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-		$this->assets_url = $this->get_assets_url();
 	}
 
-    /**
-     * @return string
-     */
-	protected function get_assets_url() {
-	    return plugin_dir_url(__FILE__) . '../../site/';
-    }
+
 
     /**
-     *
+     * Add the settings page.
      */
     public function add_settings_page() {
-	    $settings = new Settings\Settings($this->assets_url);
+	    $settings = new Settings\Settings();
 	    $settings->add_page();
     }
 
@@ -94,7 +86,7 @@ class Admin {
 		 */
 		wp_enqueue_style(
 		    $this->plugin_name,
-            $this->assets_url . 'admin/css/paseo-wp-form-api-admin.css',
+            \PASEO_WP_FORM_DIR_URL . 'site/admin/css/paseo-wp-form-api-admin.css',
             array(),
             $this->version,
             'all'
@@ -121,7 +113,7 @@ class Admin {
 		 */
 		wp_enqueue_script(
 		    $this->plugin_name,
-            $this->assets_url . 'admin/js/paseo-wp-form-api-admin.js',
+            \PASEO_WP_FORM_DIR_URL . 'site/admin/js/paseo-wp-form-api-admin.js',
             array( 'jquery', 'backbone'),
             $this->version,
             false

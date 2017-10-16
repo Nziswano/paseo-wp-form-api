@@ -55,6 +55,8 @@ const NONCE_HEADER = 'PAS-Nonce';
 const PAS_CHECK = 'PAS-Check';
 
 define( 'PASEO_WP_FORM_API_PLUGIN_VERSION', '0.0.1' );
+define( 'PASEO_WP_FORM_DIR_URL', plugin_dir_url(__FILE__));
+define( 'PASEO_WP_FORM_DIR_PATH', plugin_dir_path(__FILE__));
 
 /**
  * The code that runs during plugin activation.

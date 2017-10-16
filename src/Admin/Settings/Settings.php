@@ -21,8 +21,8 @@ class Settings
     const SETTINGS_CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
     const SETTINGS_OPTION_KEY = '_paseo_captcha_settings';
     const SETTINGS_PERMISSIONS = 'manage_options';
-    const SETTINGS_ASSETS_JS = '/admin/js/admin.js';
-    const SETTINGS_ASSETS_CSS = '/admin/css/admin.css';
+    const SETTINGS_ASSETS_JS = 'site/admin/js/admin.js';
+    const SETTINGS_ASSETS_CSS = 'site/admin/css/admin.css';
     const SETTINGS_VAR = 'PASEOFORM';
     const SETTINGS_ROUTE = '/settings';
 
@@ -63,9 +63,9 @@ class Settings
      */
     protected static $option_key = self::SETTINGS_OPTION_KEY;
 
-    public function __construct($assets_url)
+    public function __construct()
     {
-        $this->assets_url = $assets_url;
+
     }
 
     public function add_page(){
@@ -84,8 +84,8 @@ class Settings
      */
     protected function register_assets() {
         $settings = self::get_settings();
-        \wp_register_style(self::$settings['menu_slug'], $this->assets_url . self::SETTINGS_ASSETS_CSS);
-        \wp_register_script(self::$settings['menu_slug'], $this->assets_url . self::SETTINGS_ASSETS_JS, array('backbone'));
+        \wp_register_style(self::$settings['menu_slug'], \PASEO_WP_FORM_DIR_URL. self::SETTINGS_ASSETS_CSS);
+        \wp_register_script(self::$settings['menu_slug'], \PASEO_WP_FORM_DIR_URL . self::SETTINGS_ASSETS_JS, array('wp-api'));
         \wp_localize_script(self::$settings['menu_slug'], self::SETTINGS_VAR, array(
             'settings' => self::get_settings(),
             'api' => array(

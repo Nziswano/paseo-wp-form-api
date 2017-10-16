@@ -20,7 +20,7 @@ use Timber\Timber;
 
 class Main {
 
-    const TEMPLATES = '../site/templates';
+    const TEMPLATES = 'site/templates';
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -71,25 +71,16 @@ class Main {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'paseo-wp-form-api';
-		$this->site_asset_path = $this->get_assets_url();
 
-        Timber::$locations = plugin_dir_path(__FILE__) . self::TEMPLATES;
+        Timber::$locations = \PASEO_WP_FORM_DIR_PATH . self::TEMPLATES;
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->define_class_hooks();
-
 	}
 
-    /**
-     * Set path to assets.
-     * @return string
-     */
-    protected function get_assets_url() {
-        return plugin_dir_url(__FILE__) . '../site/';
-    }
 
 	/**
 	 * Load the required dependencies for this plugin.
@@ -139,7 +130,7 @@ class Main {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Admin\Admin( $this->get_plugin_name(), $this->get_version(), $this->get_assets_url() );
+		$plugin_admin = new Admin\Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action(
 		    'admin_menu',
@@ -169,7 +160,7 @@ class Main {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Pub\Pub( $this->get_plugin_name(), $this->get_version(), $this->get_assets_url() );
+		$plugin_public = new Pub\Pub( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );

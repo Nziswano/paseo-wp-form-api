@@ -8,15 +8,23 @@
 
 namespace Paseo\Admin\Settings;
 
-const SETTINGS_CAPTCHA_PUBLIC_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
-const SETTINGS_CAPTCHA_PRIVATE_KEY = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
-const SETTINGS_CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
-const SETTINGS_OPTION_KEY = '_paseo_captcha_settings';
-const SETTINGS_PERMISSIONS = 'manage_options';
+
 
 
 class Settings
 {
+    /* Constants */
+
+    const SETTINGS_CAPTCHA_PUBLIC_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+    const SETTINGS_CAPTCHA_PRIVATE_KEY = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
+    const SETTINGS_CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
+    const SETTINGS_OPTION_KEY = '_paseo_captcha_settings';
+    const SETTINGS_PERMISSIONS = 'manage_options';
+    const SETTINGS_ASSETS_JS = '/admin/js/admin.js';
+    const SETTINGS_ASSETS_CSS = '/admin/css/admin.css';
+    const SETTINGS_VAR = 'PASEO-FORM';
+    const SETTINGS_ROUTE = '/settings';
+
     /**
      * @var array
      */
@@ -32,16 +40,16 @@ class Settings
      * @var array
      */
     public static $defaults = array(
-        'captcha_public_key'    => SETTINGS_CAPTCHA_PUBLIC_KEY,
-        'captcha_private_key'   => SETTINGS_CAPTCHA_PRIVATE_KEY,
-        'captcha_url'           => SETTINGS_CAPTCHA_URL,
+        'captcha_public_key'    => self::SETTINGS_CAPTCHA_PUBLIC_KEY,
+        'captcha_private_key'   => self::SETTINGS_CAPTCHA_PRIVATE_KEY,
+        'captcha_url'           => self::SETTINGS_CAPTCHA_URL,
         'captcha_enabled'       => true
     );
 
     /**
      * @var string
      */
-    public static $permissions = SETTINGS_PERMISSIONS;
+    public static $permissions = self::SETTINGS_PERMISSIONS;
 
     /**
      * @var string
@@ -51,11 +59,13 @@ class Settings
     /**
      * @var string
      */
-    protected static $option_key = SETTINGS_OPTION_KEY;
+    protected static $option_key = self::SETTINGS_OPTION_KEY;
 
     public function __construct($assets_url)
     {
         $this->assets_url = $assets_url;
+
+
     }
 
     public function add_page(){
@@ -68,11 +78,40 @@ class Settings
         );
     }
 
+
+    /**
+     * Add necessary javascript here.
+     */
+    protected function register_assets() {
+        $settings = self::get_settings();
+        \wp_register_style(self::$settings['menu_slug'], $this->assets_url . self::SETTINGS_ASSETS_CSS);
+        \wp_register_script(self::$settings['menu_slug'], $this->assets_url . self::SETTINGS_ASSETS_JS, array('backbone'));
+        \wp_localize_script(self::$settings['menu_slug'], self::SETTINGS_VAR, array(
+            'settings' => self::get_settings(),
+            'api' => array(
+                'url' => esc_url_raw( rest_url( ROUTE . self::SETTINGS_ROUTE )),
+                'nonce' => \wp_create_nonce('wp_rest')
+            )
+        ));
+
+    }
+
+    /**
+     * add the assets
+     */
+    protected function enqueue_assets() {
+        if( !wp_script_is(self::$settings['menu_slug'], 'registered')) {
+            $this->register_assets();
+        }
+        \wp_enqueue_script(self::$settings['menu_slug']);
+        \wp_enqueue_style(self::$settings['menu_slug']);
+    }
+
     /**
      * Render Page
      */
     public function render_admin() {
-        echo 'Hello World';
+        $timber = new \Timber();
     }
 
     /**

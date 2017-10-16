@@ -9,7 +9,9 @@
             "email": "johan@paseo.org.za"
         }
     ],
-    "require": {},
+    "require": {
+        "timber/timber": "^1.5"
+    },
     "require-dev": {
     },
     "autoload": {

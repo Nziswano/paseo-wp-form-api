@@ -1,6 +1,7 @@
 <?php
 
 namespace Paseo;
+use Timber\Timber;
 
 /**
  * The core plugin class.
@@ -18,6 +19,8 @@ namespace Paseo;
  */
 
 class Main {
+
+    const TEMPLATES = '/templates';
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -69,6 +72,8 @@ class Main {
 		}
 		$this->plugin_name = 'paseo-wp-form-api';
 		$this->site_asset_path = $this->get_assets_url();
+
+        Timber::$locations = $this->get_assets_url() . self::TEMPLATES;
 
 		$this->load_dependencies();
 		$this->set_locale();

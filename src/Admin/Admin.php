@@ -84,13 +84,13 @@ class Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		wp_enqueue_style(
-		    $this->plugin_name,
-            \PASEO_WP_FORM_DIR_URL . 'site/admin/css/paseo-wp-form-api-admin.css',
-            array(),
-            $this->version,
-            'all'
-        );
+		// wp_enqueue_style(
+		//     $this->plugin_name,
+    //         \PASEO_WP_FORM_DIR_URL . 'site/admin/css/paseo-wp-form-api-admin.css',
+    //         array(),
+    //         $this->version,
+    //         'all'
+    //     );
 	}
 
 	/**
@@ -111,13 +111,13 @@ class Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		wp_enqueue_script(
-		    $this->plugin_name,
-            \PASEO_WP_FORM_DIR_URL . 'site/admin/js/paseo-wp-form-api-admin.js',
-            array( 'jquery', 'backbone'),
-            $this->version,
-            false
-        );
+		// wp_enqueue_script(
+		//     $this->plugin_name,
+    //         \PASEO_WP_FORM_DIR_URL . 'site/admin/js/paseo-wp-form-api-admin.js',
+    //         array( 'jquery', 'backbone'),
+    //         $this->version,
+    //         false
+    //     );
 	}
 
 }

@@ -6,13 +6,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = {
   entry: './src/main.ts',
   output: {
-    path: path.resolve(__dirname, '../../site/assets'),
-    filename: 'app.js'
+    path: path.resolve(__dirname, './site/assets'),
+    filename: 'form_api.js'
   },
   plugins: [
-    new CleanWebPackPlugin(['./static/assets']),
+    new CleanWebPackPlugin(['./site/assets']),
     new ExtractTextPlugin({
-      filename: 'styles.css',
+      filename: 'form_api.css',
       allChunks: true
     })
   ],

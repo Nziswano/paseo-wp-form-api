@@ -1,20 +1,13 @@
 {
   "presets": [
-    [
     "env",
-    {
-      "targets": {
-        "browsers": [
-          "last 2 versions",
-          "ie >= 7"
-        ]
-      }
-    }
-  ]
+    "react",
+    "stage-0"
   ],
   "plugins": [
     "transform-class-properties",
     "transform-decorators",
-    "transform-es2015-block-scoping"
+    "transform-react-constant-elements",
+    "transform-react-inline-elements"
   ]
 }

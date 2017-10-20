@@ -1,7 +1,7 @@
 {
-  "name": "base-wordpress-theme",
+  "name": "package_theme",
   "version": "0.0.1",
-  "description": "Base wordpress theme layout",
+  "description": "Build assets for a plugin",
   "main": "index.js",
   "directories": {
     "test": "tests"

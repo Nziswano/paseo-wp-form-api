@@ -21,8 +21,8 @@ class Settings
     const SETTINGS_CAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
     const SETTINGS_OPTION_KEY = '_paseo_captcha_settings';
     const SETTINGS_PERMISSIONS = 'manage_options';
-    const SETTINGS_ASSETS_JS = 'site/admin/js/admin.js';
-    const SETTINGS_ASSETS_CSS = 'site/admin/css/admin.css';
+    const SETTINGS_ASSETS_JS = 'site/admin/js/settings.js';
+    const SETTINGS_ASSETS_CSS = 'site/admin/css/settings.css';
     const SETTINGS_VAR = 'PASEOFORM';
     const SETTINGS_ROUTE = '/settings';
 

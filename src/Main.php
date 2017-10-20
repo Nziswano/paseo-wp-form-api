@@ -32,10 +32,6 @@ class Main {
 	 */
 	protected $loader;
 
-    /**
-     * @var path to assets.
-     */
-	protected $site_asset_path;
 
 	/**
 	 * The unique identifier of this plugin.

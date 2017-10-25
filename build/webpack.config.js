@@ -14,6 +14,9 @@ module.exports = {
     new ExtractTextPlugin({
       filename: 'paseo-wp-form-api.css',
       allChunks: true
+    }),
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery'
     })
   ],
   externals: {

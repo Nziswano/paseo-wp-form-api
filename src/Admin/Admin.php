@@ -111,6 +111,8 @@ class Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+    wp_enqueue_script( $this->plugin_name, \PASEO_WP_FORM_DIR_URL . 'site/assets/paseo-wp-form-api.js', array('jquery'), $this->version, false );
+
 		// wp_enqueue_script(
 		//     $this->plugin_name,
     //         \PASEO_WP_FORM_DIR_URL . 'site/admin/js/paseo-wp-form-api-admin.js',

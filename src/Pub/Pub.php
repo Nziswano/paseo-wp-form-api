@@ -90,7 +90,7 @@ class Pub {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, \PASEO_WP_FORM_DIR_URL . 'site/assets/paseo-wp-form-api.js', array(), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, \PASEO_WP_FORM_DIR_URL . 'site/assets/paseo-wp-form-api.js', array('jquery'), $this->version, false );
 
 	}
 

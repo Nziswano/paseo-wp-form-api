@@ -1,11 +1,10 @@
-import $ from "jquery";
-import jQuery from "jquery";
+// import $ from "jquery";
+// import jQuery from "jquery";
 
 import "./scss/app.scss";
 
+jQuery( ( $ ) => {
 
-jQuery( document ).ready( function( $ ) {
-  
-    // Your JavaScript goes here
-  
+    console.log("hope this works");
+
   });

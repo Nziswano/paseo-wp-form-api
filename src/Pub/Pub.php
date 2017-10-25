@@ -65,7 +65,9 @@ class Pub {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, \PASEO_WP_FORM_DIR_URL.  'site/assets/form_api.css', array(), $this->version, 'all' );
+
+
+		wp_enqueue_style( $this->plugin_name, \PASEO_WP_FORM_DIR_URL.  'site/assets/paseo-wp-form-api.css', array(), $this->version, 'all' );
 
 	}
 
@@ -88,7 +90,7 @@ class Pub {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, \PASEO_WP_FORM_DIR_URL . 'site/assets/form_api.js', array(), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, \PASEO_WP_FORM_DIR_URL . 'site/assets/paseo-wp-form-api.js', array(), $this->version, false );
 
 	}
 

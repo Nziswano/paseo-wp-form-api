@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "timber/timber": "^1.5"
+        "timber/timber": "~1"
     },
     "require-dev": {
     },

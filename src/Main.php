@@ -67,8 +67,7 @@ class Main {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'paseo-wp-form-api';
-
-        Timber::$locations = \PASEO_WP_FORM_DIR_PATH . self::TEMPLATES;
+    Timber::$locations = \PASEO_WP_FORM_DIR_PATH . self::TEMPLATES;
 
 		$this->load_dependencies();
 		$this->set_locale();

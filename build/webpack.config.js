@@ -7,12 +7,12 @@ module.exports = {
   entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, './site/assets'),
-    filename: 'form_api.js'
+    filename: 'paseo-wp-form-api.js'
   },
   plugins: [
     new CleanWebPackPlugin(['./site/assets']),
     new ExtractTextPlugin({
-      filename: 'form_api.css',
+      filename: 'paseo-wp-form-api.css',
       allChunks: true
     })
   ],

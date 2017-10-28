@@ -84,8 +84,8 @@ class Settings
      */
     protected function register_assets() {
         $settings = self::get_settings();
-        // \wp_register_style(self::$settings['menu_slug'], \PASEO_WP_FORM_DIR_URL. self::SETTINGS_ASSETS_CSS);
-        // \wp_register_script(self::$settings['menu_slug'], \PASEO_WP_FORM_DIR_URL . self::SETTINGS_ASSETS_JS, array('wp-api'));
+        \wp_register_script(self::$settings['menu_slug'], \PASEO_WP_FORM_DIR_URL . 'site/assets/paseo-wp-form-api.js', array('jquery', 'backbone'), \PASEO_WP_FORM_API_PLUGIN_VERSION, false);
+
         \wp_localize_script(self::$settings['menu_slug'], self::SETTINGS_VAR, array(
             'settings' => self::get_settings(),
             'api' => array(

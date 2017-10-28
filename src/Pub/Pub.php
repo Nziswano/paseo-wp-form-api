@@ -10,7 +10,7 @@ namespace Paseo\Pub;
  *
  * @package    Paseo_Wp_Form_Api
  * @subpackage Paseo_Wp_Form_Api/public
- * @author     Johan Martin <johan@paseo.org.za>
+ * @author     Johan Martnpm install bablin <johan@paseo.org.za>
  */
 class Pub {
 
@@ -90,7 +90,7 @@ class Pub {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, \PASEO_WP_FORM_DIR_URL . 'site/assets/paseo-wp-form-api.js', array('jquery'), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, \PASEO_WP_FORM_DIR_URL . 'site/assets/paseo-wp-form-api.js', array('jquery', 'backbone'), $this->version, false );
 
 	}
 

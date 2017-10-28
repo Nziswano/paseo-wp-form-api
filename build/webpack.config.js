@@ -16,16 +16,21 @@ module.exports = {
       allChunks: true
     }),
     new webpack.ProvidePlugin({
-      jQuery: 'jquery'
+      jQuery: 'jquery',
+      $: 'jquery',
+      Backbone: 'backbone'
     })
   ],
   externals: {
-    jquery: 'jQuery'
+    jquery: 'jQuery',
+    backbone: 'Backbone',
+    PASEOFORM: 'PASEOFORM'
   },
   module: {
     rules: [
       {
         test: /\.scss$/,
+        exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
@@ -37,10 +42,12 @@ module.exports = {
       },
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'babel-loader'
       },
       {
         test: /\.ts$/,
+        exclude: /node_modules/,
         loader: 'awesome-typescript-loader'
       },
       {

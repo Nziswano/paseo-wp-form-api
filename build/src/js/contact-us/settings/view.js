@@ -16,7 +16,4 @@ let SettingView = Backbone.View.extend({
   template: template
 })
 
-let view = new SettingView({
-  model: setting,
-  el: '#settings-form'
-})
+export {SettingView}

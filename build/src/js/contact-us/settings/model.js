@@ -11,3 +11,4 @@ let setting = new CaptchaSetting({
   captcha_public_key: PASEOFORM.settings.captcha_public_key
 })
 
+export {setting}

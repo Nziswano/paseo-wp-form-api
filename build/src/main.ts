@@ -1,5 +1,2 @@
+import "./js/admin.js";
 import "./scss/app.scss";
-
-jQuery( ( $ ) => {
-  console.log(PASEOFORM);
-  });

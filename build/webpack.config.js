@@ -24,7 +24,9 @@ module.exports = {
   externals: {
     jquery: 'jQuery',
     backbone: 'Backbone',
-    PASEOFORM: 'PASEOFORM'
+    PASEOFORM: 'PASEOFORM',
+    underscore: 'underscore',
+    _: 'underscore'
   },
   module: {
     rules: [
@@ -39,6 +41,11 @@ module.exports = {
             'sass-loader'
           ]
         })
+      },
+      {
+        test: /\.hbs$/,
+        exclude: /node_modules/,
+        loader: 'handlebars-loader'
       },
       {
         test: /\.js$/,

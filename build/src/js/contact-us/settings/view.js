@@ -1,4 +1,4 @@
-const template = require('../templates/settings.hbs')
+const template = require('./settings.hbs')
 
 /* global Backbone */
 /* eslint no-undef: "error" */

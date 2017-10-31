@@ -1,18 +1,20 @@
 /* global Backbone */
 /* eslint no-undef: "error" */
 import {settings} from './settings/settings'
-import {entries} from './entries/listing'
+import {view} from './entries/entries'
 
 let MyRouter = Backbone.Router.extend({
   routes: {
+    'listing': 'Listing',
+    'setting': 'Settings',
     '': 'Listing',
-    'setting': 'Settings'
+    '*default': 'Listing'
   },
   Settings: () => {
     settings()
   },
   Listing: () => {
-    entries()
+    view()
   }
 })
 

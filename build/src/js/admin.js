@@ -6,4 +6,5 @@ import {MyRouter} from './contact-us/router'
 jQuery(($) => {
   const router = new MyRouter()
   Backbone.history.start()
+  console.log(router)
 })

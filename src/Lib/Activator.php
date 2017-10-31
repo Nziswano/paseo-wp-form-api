@@ -45,7 +45,7 @@ class Activator {
 	public static function update_db () {
 
 	  $option_key = \DB_TABLE . '_db_version';
-	  $db_version = '1.1';
+	  $db_version = \DB_SCHEMA_VERSION;
 	  $current_version = \get_option( $option_key );
 
 	  if ($db_version == $current_version) {

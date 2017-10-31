@@ -62,6 +62,7 @@ class Activator {
     fingerprint VARCHAR(75) NOT NULL,
     contact_info JSON,
     is_processed BOOLEAN NOT NULL DEFAULT FALSE,
+    when_processed TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     UNIQUE KEY id (id)
     ) $charset_collate;";

@@ -24,11 +24,20 @@
  *
  * @package    Paseo_Wp_Form_Api
  */
-
+function paseo_wp_form_api_uninstall ()
+{
 // If uninstall not called from WordPress, then exit.
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	exit;
-}
+  if (!defined('WP_UNINSTALL_PLUGIN')) {
+    exit();
+  }
+  $options = array(
+    \DB_TABLE . '_db_version',
+    '_paseo_captcha_settings'
+  );
+  foreach ($option as $options) {
+    delete_option($option);
+  }
 
-global $wpdb;
-$wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}contact_us");
+  global $wpdb;
+  $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}contact_us");
+}

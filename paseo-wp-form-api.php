@@ -70,6 +70,15 @@ define( 'PASEO_WP_FORM_DIR_PATH', plugin_dir_path(__FILE__));
  */
  register_deactivation_hook( __FILE__, array('Paseo\Lib\Activator', 'deactivate') );
 
+/**
+ * Update database
+ */
+  add_action('plugins_loaded', array('Paseo\Lib\Activator', 'update_db'));
+
+/**
+ * uninstall hook
+ */
+ register_uninstall_hook('uninstall.php', 'paseo_wp_form_api_uninstall');
 
 /**
  * Begins execution of the plugin.

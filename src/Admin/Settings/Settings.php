@@ -25,6 +25,7 @@ class Settings
     const SETTINGS_ASSETS_CSS = 'site/admin/css/settings.css';
     const SETTINGS_VAR = 'PASEOFORM';
     const SETTINGS_ROUTE = '/settings';
+    const LISTINGS_ROUTE = '/contact-us-admin';
 
     /**
      * @var array
@@ -90,7 +91,8 @@ class Settings
         \wp_localize_script(self::$settings['menu_slug'], self::SETTINGS_VAR, array(
             'settings' => self::get_settings(),
             'api' => array(
-                'url' => esc_url_raw( rest_url( ROUTE . self::SETTINGS_ROUTE )),
+                'settings_url' => esc_url_raw( rest_url( ROUTE . self::SETTINGS_ROUTE )),
+                'listings_url' => esc_url_raw( rest_url( ROUTE . self::LISTINGS_ROUTE)),
                 'nonce' => \wp_create_nonce('wp_rest')
             )
         ));

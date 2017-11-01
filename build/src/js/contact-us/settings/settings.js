@@ -8,7 +8,7 @@ const Setting = Backbone.Model.extend({
     captcha_private_key: '',
     captcha_public_key: ''
   },
-  url: PASEOFORM.api.url
+  url: PASEOFORM.api.settings_url
 })
 
 let setting = new Setting({

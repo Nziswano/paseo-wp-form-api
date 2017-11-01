@@ -40,7 +40,9 @@ class Listings
    * @return mixed
    */
   public function getList() {
-    $list = $this->wpdb->get_results('SELECT * FROM '. $this->table_name);
+    // id, fingerprint, JSON_TYPE(contact_info) as contact_info, created, is_processed, when_processed
+    $list = $this->db->get_results(
+      'SELECT * FROM '. $this->table_name);
     return $list;
   }
 
@@ -50,7 +52,7 @@ class Listings
    * @return mixed
    */
   public function getContact( $contact_id ) {
-    $query = "SELECT * FROM " . $this->table_name . " WHERE id = %d";
+    $query = "SELECT * FROM " . $this->table_name . " WHERE id = '%d'";
     $contact = $this->db->get_row( $this->db->prepare( $query, $contact_id));
     return $contact;
   }
@@ -81,12 +83,12 @@ class Listings
    */
   public static function process_listings( \WP_REST_Request $request ) {
     $result = new \WP_REST_Response();
-    if( self::$listing == NULL ) {
-      self::$listing = new Listings();
+    if( Listings::$listing == NULL ) {
+      Listings::$listing = new Listings();
     }
 
     if ( GET == $request->get_method() ) {
-      $result->set_data( self::$listing->getList());
+      $result->set_data( Listings::$listing->getList());
     }
 
     return $result;

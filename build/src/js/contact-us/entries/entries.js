@@ -1,19 +1,11 @@
 /* global Backbone */
 
+import {entries} from './entry'
+
 const template = require('./listing.hbs')
 
-const Entry = Backbone.Model.extend({
-  default: {
-    listing: 'this is a listing'
-  }
-})
-
-let entry = new Entry({
-  listing: 'This is a test message'
-})
-
-const View = Backbone.View.extend({
-  el: '#app',
+const EntryView = Backbone.View.extend({
+  tagName: 'li',
   initialize: function () {
     this.render()
   },
@@ -26,10 +18,33 @@ const View = Backbone.View.extend({
   }
 })
 
-export function view () {
-  let view = new View({
-    model: entry
+let EntriesView = Backbone.View.extend({
+  el: '#app',
+  initialize: function () {
+    console.log('initialized')
+    this.listenTo(this.collection, 'sync', function () {
+      this.render()
+    })
+    this.collection.fetch()
+    console.log('initialized finished')
+  },
+  collection: entries,
+  render: function () {
+    let self = this
+    self.collection.each(
+      function (item) {
+        let entryView = new EntryView(
+          {
+            model: item
+          }
+        )
+        console.log('Entry: ', item.attributes)
+        self.$el.append(entryView.render().el)
+      }, self
+    )
   }
-  )
-  return view
+})
+
+export function entriesView () {
+  return new EntriesView({})
 }

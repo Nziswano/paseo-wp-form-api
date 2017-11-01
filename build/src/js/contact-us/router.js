@@ -1,7 +1,7 @@
 /* global Backbone */
 /* eslint no-undef: "error" */
 import {settings} from './settings/settings'
-import {view} from './entries/entries'
+import {entriesView} from './entries/entries'
 
 let MyRouter = Backbone.Router.extend({
   routes: {
@@ -14,7 +14,7 @@ let MyRouter = Backbone.Router.extend({
     settings()
   },
   Listing: () => {
-    view()
+    entriesView()
   }
 })
 

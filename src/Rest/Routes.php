@@ -34,10 +34,10 @@ class Routes
         'permissions_callback' => array('Paseo\Admin\Settings\Settings', 'permissions')
       )
     );
-    register_rest_route(\ROUTE, '/contacts',
+    register_rest_route(\ROUTE, '/contact-us-admin',
       array(
         'methods' => 'GET, POST',
-        'callback' => array('Paseo\Admin\Listinngs\Listings', 'process_listings'),
+        'callback' => array('Paseo\Admin\Listings\Listings', 'process_listings'),
         'permissions_callback' => array('Paseo\Admin\Settings\Settings', 'permissions')
       )
     );

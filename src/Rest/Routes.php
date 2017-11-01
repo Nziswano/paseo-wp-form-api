@@ -22,15 +22,15 @@ class Routes
 
     register_rest_route(\ROUTE, '/settings',
       array(
-        'methods' => 'POST',
-        'callback' => array('Paseo\Admin\Settings\Settings', 'update_settings'),
+        'methods' => 'POST, PUT, PATCH',
+        'callback' => array('Paseo\Admin\Settings\Rest', 'update_settings'),
         'permissions_callback' => array('Paseo\Admin\Settings\Settings', 'permissions')
       )
     );
     register_rest_route(ROUTE, '/settings',
       array(
         'methods' => 'GET',
-        'callback' => array('Paseo\Admin\Settings\Settings', 'check_settings'),
+        'callback' => array('Paseo\Admin\Settings\Rest', 'check_settings'),
         'permissions_callback' => array('Paseo\Admin\Settings\Settings', 'permissions')
       )
     );

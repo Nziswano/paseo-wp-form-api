@@ -37,6 +37,10 @@ class Activator {
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $sql );
 
+		//set options for captcha
+
+    \Paseo\Admin\Settings\Settings::init_settings();
+
 	}
 
   /**

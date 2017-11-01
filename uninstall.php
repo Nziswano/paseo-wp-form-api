@@ -32,9 +32,9 @@ function paseo_wp_form_api_uninstall ()
   }
   $options = array(
     \DB_TABLE . '_db_version',
-    '_paseo_captcha_settings'
+    \CAPTCHA_OPTION_KEY
   );
-  foreach ($option as $options) {
+  foreach ($options as $option) {
     delete_option($option);
   }
 

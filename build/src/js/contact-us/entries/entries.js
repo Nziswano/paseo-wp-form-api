@@ -27,12 +27,10 @@ const EntryView = Backbone.View.extend({
 let EntriesView = Backbone.View.extend({
   el: '#app',
   initialize: function () {
-    console.log('initialized')
     this.listenTo(this.collection, 'sync', function () {
       this.render()
     })
     this.collection.fetch()
-    console.log('initialized finished')
   },
   collection: entries,
   render: function () {

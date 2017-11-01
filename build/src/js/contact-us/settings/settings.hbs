@@ -2,23 +2,30 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label" for="public_key">Public Key</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="public_key" aria-describedby="public_keyHelp" placeholder="Public Key" value="{{captcha_public_key}}">
+      <input type="text" class="form-control" id="public_key" name="captcha_public_key" aria-describedby="public_keyHelp" placeholder="Public Key" value="{{captcha_public_key}}">
       <small id="public_keyHelp" class="form-text text-muted">Captcha Public Key</small>
     </div>
   </div>
   <div class="form-group row">
     <label class="col-sm-2 col-form-label" for="private_key">Private Key</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="private_key" aria-describedby="private_keyHelp" placeholder="Private Key" value="{{captcha_private_key}}">
+      <input type="text" class="form-control" id="private_key" name="captcha_private_key" aria-describedby="private_keyHelp" placeholder="Private Key" value="{{captcha_private_key}}">
       <small id="private_keyHelp" class="form-text text-muted">Captcha Private Key</small>
     </div>
     </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="captcha_url">Captcha Url</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="captcha_url" name="captcha_url" aria-describedby="captcha_urlHelp" placeholder="Captcha Url" value="{{captcha_url}}">
+      <small id="captcha_urlHelp" class="form-text text-muted">Captcha Url</small>
+    </div>
+  </div>
   <div class="form-group row">
     <div class="col-sm-2">Enable Captcha</div>
     <div class="col-sm-10">
     <div class="form-check">
       <label class="form-check-label">
-      <input type="checkbox" class="form-check-input" aria-describedby="captcha_enableHelp" {{#if captcha_enabled}}checked{{/if}}>Captcha Enabled
+      <input type="checkbox" class="form-check-input" id="captcha_enabled" name="captcha_enabled" aria-describedby="captcha_enableHelp" {{#if captcha_enabled}}checked{{/if}}>Captcha Enabled
         <small id="captcha_enableHelp" class="form-text text-muted">Enable Captcha</small>
       </label>
     </div>

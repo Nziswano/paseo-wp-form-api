@@ -53,6 +53,7 @@ const CAPTCHA = 'PAS-Captcha';
 const DB_TABLE = 'contact_us';
 const NONCE_HEADER = 'PAS-Nonce';
 const PAS_CHECK = 'PAS-Check';
+const CAPTCHA_OPTION_KEY = '_paseo_captcha_settings';
 const DB_SCHEMA_VERSION = '1.1.1';
 
 define( 'PASEO_WP_FORM_API_PLUGIN_VERSION', '0.0.1' );

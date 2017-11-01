@@ -32,10 +32,7 @@ class Rest
     public static function update_settings( \WP_REST_Request $request ) {
         $settings = array();
         foreach( Settings::$defaults as $setting => $value ){
-            $result = $request->get_param($setting);
-            if($result) {
-                $settings[$setting] = $result;
-            }
+          $settings[$setting] = $request->get_param($setting);
         }
         Settings::save_settings($settings);
         $updated_settings = self::get_settings();

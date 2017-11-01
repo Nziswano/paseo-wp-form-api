@@ -6,9 +6,6 @@ const template = require('./listing.hbs')
 
 const EntryView = Backbone.View.extend({
   tagName: 'li',
-  initialize: function () {
-    this.render()
-  },
   template: template,
   render: function () {
     'use strict'
@@ -20,7 +17,7 @@ const EntryView = Backbone.View.extend({
     'click button': 'updateProcessed'
   },
   updateProcessed: function () {
-    this.model.save({is_processed: 1}, {patch: true})
+    this.model.save({is_processed: 1})
   }
 })
 

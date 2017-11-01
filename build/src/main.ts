@@ -1,2 +1,2 @@
 import "./js/admin.js";
-import "./scss/bootstrap.scss";
+import "./scss/app.scss";

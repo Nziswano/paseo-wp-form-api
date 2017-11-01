@@ -27,7 +27,7 @@ const View = Backbone.View.extend({
   model: setting,
 
   events: {
-    'click button': 'saveForm',
+    'click button.settings': 'saveForm',
     'change': 'itemChange'
   },
 
@@ -61,6 +61,7 @@ const View = Backbone.View.extend({
 
   render: function () {
     'use strict'
+    this.$el.empty()
     let output = this.template(this.model.attributes)
     this.$el.html(output)
     return this

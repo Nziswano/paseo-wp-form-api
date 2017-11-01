@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Paseo Forms API
  * Plugin URI:        https://github.com/catenare/paseo-wp-form-api
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Paseo contact us plugin. Demo plugin for Wordpress.
  * Version:           1.0.0
  * Author:            Johan Martin
  * Author URI:        http://www.johan-martin.com

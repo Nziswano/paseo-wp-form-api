@@ -87,7 +87,10 @@ class Settings
       false);
     \wp_register_script(self::$settings['menu_slug'],
       \PASEO_WP_FORM_DIR_URL . 'site/assets/paseo-wp-form-api.js',
-      array('jquery', 'backbone'),
+      array(
+        'jquery',
+        'backbone'
+        ),
       \PASEO_WP_FORM_API_PLUGIN_VERSION,
       false);
 

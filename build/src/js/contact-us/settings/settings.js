@@ -51,8 +51,8 @@ const View = Backbone.View.extend({
     }
     this.model.set(target.name, value)
   },
-  saveSuccess: function () {
-    console.log('saved')
+  saveSuccess: function (e) {
+    console.log('saved', e)
   },
 
   el: '#app',

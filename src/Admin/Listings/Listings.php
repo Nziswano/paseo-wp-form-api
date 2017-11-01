@@ -52,7 +52,7 @@ class Listings
               created,
               if( is_processed != 1, null, 1) as is_processed,
               when_processed 
-              FROM ". $this->table_name);
+              FROM ". $this->table_name . " ORDER BY created DESC");
     return $list;
   }
 

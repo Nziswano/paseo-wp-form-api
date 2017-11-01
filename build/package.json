@@ -63,6 +63,7 @@
     "handlebars": "^4.0.11",
     "handlebars-loader": "^1.6.0",
     "jasmine": "^2.8.0",
+    "just-handlebars-helpers": "^1.0.13",
     "karma": "^1.7.1",
     "node-sass": "^4.5.3",
     "npm-run-all": "^4.1.1",

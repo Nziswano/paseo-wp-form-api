@@ -36,7 +36,7 @@ class Routes
     );
     register_rest_route(\ROUTE, '/contact-us-admin',
       array(
-        'methods' => 'GET, POST',
+        'methods' => 'GET, POST, PUT, PATCH',
         'callback' => array('Paseo\Admin\Listings\Listings', 'process_listings'),
         'permissions_callback' => array('Paseo\Admin\Settings\Settings', 'permissions')
       )

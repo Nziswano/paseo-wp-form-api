@@ -40,9 +40,19 @@ class Listings
    * @return mixed
    */
   public function getList() {
-    // id, fingerprint, JSON_TYPE(contact_info) as contact_info, created, is_processed, when_processed
     $list = $this->db->get_results(
-      'SELECT * FROM '. $this->table_name);
+      "SELECT 
+              id, 
+              fingerprint, 
+              JSON_UNQUOTE(JSON_EXTRACT(contact_info, '$.email')) as email, 
+              JSON_UNQUOTE(JSON_EXTRACT(contact_info, '$.message')) as message,
+              JSON_UNQUOTE(JSON_EXTRACT(contact_info, '$.fullname')) as name,
+              JSON_UNQUOTE(JSON_EXTRACT(contact_info, '$.telephone')) as telephone,
+              contact_info as contact_info,
+              created,
+              if( is_processed != 1, null, 1) as is_processed,
+              when_processed 
+              FROM ". $this->table_name);
     return $list;
   }
 
@@ -62,17 +72,15 @@ class Listings
    * @return false|int
    */
   public function updateContact( $contact_id ) {
-
     $result = $this->db->update(
       $this->table_name,
       array(
-        'is_processed' => 1
+        'is_processed' => '1'
       ),
       array( 'id' => $contact_id),
     array( '%d' ),
-      array('%')
+      array('%d')
     );
-
     return $result;
   }
 
@@ -83,6 +91,7 @@ class Listings
    */
   public static function process_listings( \WP_REST_Request $request ) {
     $result = new \WP_REST_Response();
+
     if( Listings::$listing == NULL ) {
       Listings::$listing = new Listings();
     }
@@ -91,6 +100,10 @@ class Listings
       $result->set_data( Listings::$listing->getList());
     }
 
+    if ( "PATCH" == $request->get_method() || "PUT" == $request->get_method()  ){
+      $data = Listings::$listing->updateContact( $request->get_param('id'));
+      $result->set_data($data);
+    }
     return $result;
   }
 }

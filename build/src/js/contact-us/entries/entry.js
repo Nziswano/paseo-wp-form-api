@@ -2,12 +2,7 @@
 
 const Entry = Backbone.Model.extend({
   default: {
-    id: 'id',
-    fingerprint: 'fingerprint',
-    contact_info: 'contact info',
-    created: 'created',
-    is_processed: false,
-    when_processed: 'when_processed'
+    fingerprint: 'fingerprint'
   },
   url: PASEOFORM.api.listings_url
 })
@@ -19,6 +14,8 @@ const Entries = Backbone.Collection.extend({
 
 let entry = new Entry({})
 
-let entries = new Entries()
+let entries = new Entries({
+  model: new Entry({})
+})
 
 export {entry, entries}

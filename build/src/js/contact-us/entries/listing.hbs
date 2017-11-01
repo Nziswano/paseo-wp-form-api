@@ -1,5 +1,20 @@
-<h1>Listing</h1>
 <ul>
- <li>{{id}}</li>
-  <li>{{contact_info.email}}</li>
+  <li>{{email}}</li>
+  <li>{{name}}</li>
+  <li>{{telephone}}</li>
+  <li class="message">{{message}}</li>
+  <li>{{created}}</li>
+  <li>Processed? {{is_processed}}</li>
+  <li>
+    {{#if is_processed}}
+      Was processed: {{when_processed}}
+    {{else}}
+      Not Processed
+    {{/if}}
+  </li>
+  <li>
+    {{#unless is_processed}}
+      <button data-id="{{id}}">Process</button>
+    {{/unless}}
+  </li>
 </ul>

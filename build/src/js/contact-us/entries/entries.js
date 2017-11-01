@@ -15,6 +15,12 @@ const EntryView = Backbone.View.extend({
     let output = this.template(this.model.attributes)
     this.$el.html(output)
     return this
+  },
+  events: {
+    'click button': 'updateProcessed'
+  },
+  updateProcessed: function () {
+    this.model.save({is_processed: 1}, {patch: true})
   }
 })
 
@@ -30,6 +36,7 @@ let EntriesView = Backbone.View.extend({
   },
   collection: entries,
   render: function () {
+    this.$el.empty()
     let self = this
     self.collection.each(
       function (item) {
@@ -38,10 +45,10 @@ let EntriesView = Backbone.View.extend({
             model: item
           }
         )
-        console.log('Entry: ', item.attributes)
         self.$el.append(entryView.render().el)
       }, self
     )
+    return self
   }
 })
 

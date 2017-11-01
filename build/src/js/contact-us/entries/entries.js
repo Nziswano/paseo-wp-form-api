@@ -1,11 +1,12 @@
 /* global Backbone */
 
 import {entries} from './entry'
+import table from './list'
 
 const template = require('./listing.hbs')
 
 const EntryView = Backbone.View.extend({
-  tagName: 'li',
+  tagName: 'tr',
   template: template,
   render: function () {
     'use strict'
@@ -33,6 +34,7 @@ let EntriesView = Backbone.View.extend({
   render: function () {
     this.$el.empty()
     let self = this
+    let output = $(table)
     self.collection.each(
       function (item) {
         let entryView = new EntryView(
@@ -40,9 +42,10 @@ let EntriesView = Backbone.View.extend({
             model: item
           }
         )
-        self.$el.append(entryView.render().el)
+        output.append(entryView.render().el)
       }, self
     )
+    self.$el.html(output)
     return self
   }
 })

@@ -1,20 +1,15 @@
-<ul>
-  <li>{{email}}</li>
-  <li>{{name}}</li>
-  <li>{{telephone}}</li>
-  <li class="message">{{message}}</li>
-  <li>{{created}}</li>
-  <li>Processed? {{is_processed}}</li>
-  <li>
-    {{#if is_processed}}
-      Was processed: {{when_processed}}
-    {{else}}
-      Not Processed
-    {{/if}}
-  </li>
-  <li>
-    {{#unless is_processed}}
-      <button class="button" data-id="{{id}}">Process</button>
-    {{/unless}}
-  </li>
-</ul>
+<td>{{name}}</td>
+<td>{{email}}</td>
+<td>{{telephone}}</td>
+<td class="message">{{message}}</td>
+<td>{{created}}</td>
+<td>
+  {{#if is_processed}}
+   {{when_processed}}
+  {{/if}}
+</td>
+<td>
+  {{#unless is_processed}}
+    <button class="success button" data-id="{{id}}">Process</button>
+  {{/unless}}
+</td>
